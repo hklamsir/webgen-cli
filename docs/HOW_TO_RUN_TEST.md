@@ -1,10 +1,4 @@
-#測試啟動：
-
-```powershell
-python shell.py
-```
-
-若提示 `API Key` 未設定或其他相依錯誤，請參考 `logs/agent.log` 或在 shell 中確認 `config.json` 欄位是否正確。
+# 測試啟動：
 
 **執行測試 (Running Tests)**
 
@@ -56,4 +50,5 @@ python3 -m pytest -q
   - 若要快速安裝開發用套件，可使用 `pip install watchdog`（某些測試或本地即時同步功能會使用 `watchdog`）。
   - 測試檔位於 `tests/`，為了快速迭代可只執行單一檔案或單一測試。
   - 在 CI 中請使用 `python -m pytest -q` 或你偏好的 pytest 參數（例如 `--maxfail=1 -k <pattern>`）。
+
 

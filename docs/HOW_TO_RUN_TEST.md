@@ -6,12 +6,6 @@
 - **在 Windows PowerShell (推薦)**：
 
 ```powershell
-# 啟用虛擬環境（PowerShell）
-.\.venv\Scripts\Activate.ps1
-
-# 若出現執行政策錯誤，暫時放寬當前會話執行政策：
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
-
 # 安裝測試套件（只需第一次）
 pip install pytest
 
@@ -31,8 +25,6 @@ python -m pytest -v
 - **在 Windows (cmd.exe)**：
 
 ```cmd
-python -m venv .venv
-.\.venv\Scripts\activate.bat
 pip install pytest
 python -m pytest -q
 ```
@@ -40,8 +32,6 @@ python -m pytest -q
 - **在 macOS / Linux (bash / zsh)**：
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
 pip install pytest
 python3 -m pytest -q
 ```
@@ -50,5 +40,6 @@ python3 -m pytest -q
   - 若要快速安裝開發用套件，可使用 `pip install watchdog`（某些測試或本地即時同步功能會使用 `watchdog`）。
   - 測試檔位於 `tests/`，為了快速迭代可只執行單一檔案或單一測試。
   - 在 CI 中請使用 `python -m pytest -q` 或你偏好的 pytest 參數（例如 `--maxfail=1 -k <pattern>`）。
+
 
 

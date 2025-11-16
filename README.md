@@ -19,12 +19,12 @@ webgen_cli/
 ├── llm_client.py           # 核心：管理所有 LLM 提示 (Prompts) 和 API 呼叫
 ├── file_manager.py         # 核心：檔案 I/O、解析和組裝
 ├── file_generator.py       # 核心：協調 llm_client 和 file_manager
+├── ftp_deployer.py         # 核心：處理 FTP 上傳邏輯
 │
 ├── project_manager.py      # 狀態：管理專案 (list, open, create)
 ├── project_session.py      # 狀態：管理活動專案 (包含 FileWatcher)
 ├── file_watcher.py         # 狀態：啟動/停止 Watchdog 監控
 ├── sync_handler.py         # 狀態：Watchdog 事件處理 (HTML -> workings/)
-├── ftp_deployer.py         # 狀態：處理 FTP 上傳邏輯
 │
 ├── commands/               # (所有 Shell 命令模組)
 │   ├── command_parser.py   # (共用) 自訂 Argparse 解析器
@@ -82,24 +82,14 @@ webgen_cli/
 - 建議安裝套件：`requests`, `tqdm`, `colorama`, `watchdog`（若要即時同步）。
 - 在專案根目錄建立或編輯 `config.json`，加入至少 `deepseek_api_key`。例如：
 
-```json
-{
-  "deepseek_api_key": "YOUR_KEY",
-  "model": "deepseek-coder",
-  "chat_model": "deepseek-chat",
-  "projects_root": "projects",
-  "max_generation_workers": 4
-}
-```
-
 ## 安裝與設定（步驟） ##
-### 1. 安裝必要套件： ###
+1. 安裝必要套件：
 
 ```powershell
 pip install requests tqdm colorama watchdog
 ```
 
-### 2. 設定 `config.json`：在專案根目錄建立 `config.json`，並至少填入 `deepseek_api_key`（與可選的 `ftp_config`）： ###
+2. 設定 `config.json`：在專案根目錄建立 `config.json`，並至少填入 `deepseek_api_key與可選的 `ftp_config：
 
 ```json
 {
@@ -115,9 +105,9 @@ pip install requests tqdm colorama watchdog
   "projects_root": "projects",
   "max_generation_workers": 5
 }
-}
 ```
- 
+<br>
+---
 
 ## 🚀快速開始 ##
 1. 在專案根目錄啟動 shell：
@@ -139,6 +129,10 @@ python shell.py
 - `deploy`：透過 `ftp_deployer.py` 將專案上傳至遠端 FTP。
 - `updatehtml`：手動重新組裝 HTML（由 `workings/_header.html` + 每頁 `<main>` + `workings/_footer.html` 組成）。
 
+**所有指令解說可查看** [docs/USAGE_TW.md](docs/USAGE_TW.md)
+
+<br>
+---
 **重要規範：LLM 與 DOM 合約**
 - 所有 prompt 與回應模板集中於 `llm_client.py`。修改前請仔細閱讀 `GLOBAL_DOM_CONTRACT`。
 - 結構生成（`generate_structure`）要求 LLM 僅回傳 JSON 陣列（檔案路徑列表），不得有其它多餘文字。

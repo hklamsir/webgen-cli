@@ -165,8 +165,8 @@ python shell.py
 - 修改 prompt：若要改動 `GLOBAL_DOM_CONTRACT`，必須同時更新 `js/script.js` 與 header/footer 模板以保持一致性。
 - 測試 LLM 行為：建議先以短描述嘗試，觀察 `logs/` 與 `tqdm` 輸出，再逐步調整 prompt。
 
-**聯絡與回饋**
-若你發現 prompt 或組裝邏輯（`assemble_html_files`）有待調整，請提出 issue 或在專案中註明建議。我也可以協助自動化流程或新增測試。
+## 聯絡與回饋 ##
+若你發現 prompt、程式邏輯有待調整或想新增測試，請提出 issue 或在專案中註明建議。
 
 
 ---

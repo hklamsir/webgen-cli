@@ -106,8 +106,8 @@ pip install requests tqdm colorama watchdog
   "max_generation_workers": 5
 }
 ```
+
 <br>
----
 
 ## 🚀快速開始 ##
 1. 在專案根目錄啟動 shell：
@@ -132,7 +132,9 @@ python shell.py
 **所有指令解說可查看** [docs/USAGE_TW.md](docs/USAGE_TW.md)
 
 <br>
+
 ---
+
 **重要規範：LLM 與 DOM 合約**
 - 所有 prompt 與回應模板集中於 `llm_client.py`。修改前請仔細閱讀 `GLOBAL_DOM_CONTRACT`。
 - 結構生成（`generate_structure`）要求 LLM 僅回傳 JSON 陣列（檔案路徑列表），不得有其它多餘文字。
@@ -163,4 +165,3 @@ python shell.py
 若你發現 prompt、程式邏輯有待調整或想新增測試，請提出 issue 或在專案中註明建議。
 
 
----

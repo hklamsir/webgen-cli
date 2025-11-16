@@ -700,10 +700,7 @@ gen --description "旅遊部落格，含景點介紹與聯絡頁" --header "Logo
 
 4. 當生成完成後，預覽 `projects/<project_name>/index.html`（shell 會嘗試開啟瀏覽器預覽）。
 
-## 聯絡與回饋
-
-若你發現 prompt 的限制或合併邏輯（`assemble_html_files`）需要調整，請提出 issue 或直接在檔案中註明建議。若需我幫你把某個流程自動化或新增測試，我可以繼續幫忙實作。
 
 ---
 
-此份文件由 AI 助手根據程式碼庫內容產出；如需補充具體範例或擴充章節（例如更詳細的 prompt 範例或 unit test 指南），請告知要補充的主題。
+

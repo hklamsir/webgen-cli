@@ -56,35 +56,29 @@ class FileCommands:
     def _is_safe_path(self: "WebsiteShell", user_input: str, target_path: Path) -> bool:
         """(安全) 檢查目標路徑是否安全且在專案目錄內。"""
         if not self.current_session:
-            return False # 沒有專案上下文
+            return False
         
         try:
             project_path = self.current_session.path
             
-            # 2a. 檢查 '..' 是否在使用者輸入的路徑片段中 (第一道防線)
-            if '..' in Path(user_input).parts:
-                print(f"安全錯誤：不允許使用 '..' 進行路徑遍歷。")
-                return False
-                
-            # 2b. 解析絕對路徑 (處理 symlinks 等)
+            # 關鍵：先拼接再 resolve，確保所有相對/絕對/symlink/.. 都被標準化
             proj_abs = project_path.resolve()
-            target_abs = target_path.resolve()
+            target_abs = (project_path / user_input).resolve()  # <-- 先拼接再 resolve
+            # target_abs = target_path.resolve()  # <-- 舊寫法：直接 resolve 外部傳入的 Path，可能已污染
             
-            # 2c. 檢查目標是否真的是專案路徑的子路徑 (第二道防線)
+            # 檢查是否為子路徑
             target_abs.relative_to(proj_abs)
             
-            # 2d. 額外保護：不允許操作專案根目錄本身
+            # 額外保護：不允許操作專案根目錄本身
             if proj_abs == target_abs:
                 print(f"安全錯誤：拒絕操作專案根目錄。")
                 return False
                 
             return True
         except ValueError:
-            # 如果 relative_to 失敗，表示路徑在專案之外
             print(f"安全錯誤：操作路徑 '{user_input}' 已超出專案邊界。")
             return False
         except Exception as e:
-            # 捕獲其他潛在錯誤 (例如權限)
             self.logger.warning(f"_is_safe_path 檢查時出錯: {e}")
             return False
 

@@ -10,10 +10,12 @@ except ImportError:
     print("錯誤：project_manager.py 無法導入 file_manager。", file=sys.stderr)
     sys.exit(1)
 
+
 class ProjectManager:
     """
     負責處理專案的生命週期，如建立、開啟、列出。
     """
+
     def __init__(self, config):
         self.config = config
         self.projects_root = Path(config.get("projects_root", "projects"))
@@ -55,6 +57,10 @@ class ProjectManager:
         """
         (自動完成輔助) 獲取 'projects/' 目錄下的專案目錄名稱。
         """
-        if not self.projects_root.exists(): return []
-        return [d.name for d in self.projects_root.iterdir() if d.is_dir() and d.name.startswith(text)]
-
+        if not self.projects_root.exists():
+            return []
+        return [
+            d.name
+            for d in self.projects_root.iterdir()
+            if d.is_dir() and d.name.startswith(text)
+        ]
